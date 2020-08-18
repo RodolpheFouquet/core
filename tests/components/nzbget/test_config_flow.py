@@ -3,6 +3,7 @@ from pynzbgetapi import NZBGetAPIException
 
 from homeassistant.components.nzbget.const import DOMAIN
 from homeassistant.config_entries import SOURCE_USER
+from homeassistant.const import CONF_VERIFY_SSL
 from homeassistant.data_entry_flow import (
     RESULT_TYPE_ABORT,
     RESULT_TYPE_CREATE_ENTRY,
@@ -33,7 +34,7 @@ async def test_form(hass):
 
         assert result2["type"] == RESULT_TYPE_CREATE_ENTRY
         assert result2["title"] == "10.10.10.30"
-        assert result2["data"] == ENTRY_CONFIG
+        assert result2["data"] == {**ENTRY_CONFIG, CONF_VERIFY_SSL: False}
 
         await hass.async_block_till_done()
         assert len(mock_setup.mock_calls) == 1
