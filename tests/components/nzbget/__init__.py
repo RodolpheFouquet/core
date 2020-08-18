@@ -15,6 +15,15 @@ from tests.common import MockConfigEntry
 
 ENTRY_CONFIG = {
     CONF_HOST: "10.10.10.30",
+    CONF_NAME: "NZBGetTest",
+    CONF_PASSWORD: "",
+    CONF_PORT: 6789,
+    CONF_SSL: False,
+    CONF_USERNAME: "",
+}
+
+YAML_CONFIG = {
+    CONF_HOST: "10.10.10.30",
     CONF_NAME: "GetNZBsTest",
     CONF_PASSWORD: "",
     CONF_PORT: 6789,
