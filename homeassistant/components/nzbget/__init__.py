@@ -93,7 +93,7 @@ async def async_setup_entry(hass: HomeAssistantType, entry: ConfigEntry) -> bool
         }
         hass.config_entries.async_update_entry(entry, options=options)
 
-    coordinator = NZBGetDataUpdateCoordinator(hass, config=entry.data)
+    coordinator = NZBGetDataUpdateCoordinator(hass, config=entry.data, options=entry.options)
 
     await coordinator.async_refresh()
 
@@ -162,7 +162,7 @@ class NZBGetDataUpdateCoordinator(DataUpdateCoordinator):
     """Class to manage fetching NZBGet data."""
 
     def __init__(
-        self, hass: HomeAssistantType, *, config: dict,
+        self, hass: HomeAssistantType, *, config: dict, optionz: dict
     ):
         """Initialize global NZBGet data updater."""
         self.nzbget = NZBGetAPI(
@@ -177,7 +177,7 @@ class NZBGetDataUpdateCoordinator(DataUpdateCoordinator):
         self._completed_downloads_init = False
         self._completed_downloads = {}
 
-        update_interval = timedelta(seconds=config[CONF_SCAN_INTERVAL])
+        update_interval = timedelta(seconds=options[CONF_SCAN_INTERVAL])
 
         super().__init__(
             hass, _LOGGER, name=DOMAIN, update_interval=update_interval,
