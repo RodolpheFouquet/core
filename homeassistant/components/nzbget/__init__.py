@@ -162,7 +162,7 @@ class NZBGetDataUpdateCoordinator(DataUpdateCoordinator):
     """Class to manage fetching NZBGet data."""
 
     def __init__(
-        self, hass: HomeAssistantType, *, config: dict, optionz: dict
+        self, hass: HomeAssistantType, *, config: dict, options: dict
     ):
         """Initialize global NZBGet data updater."""
         self.nzbget = NZBGetAPI(
