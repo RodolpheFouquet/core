@@ -10,7 +10,14 @@ from homeassistant.config_entries import (
 from homeassistant.const import CONF_HOST, CONF_NAME, CONF_PORT
 from homeassistant.setup import async_setup_component
 
-from . import ENTRY_CONFIG, MOCK_HISTORY, MOCK_STATUS, MOCK_VERSION, init_integration
+from . import (
+    ENTRY_CONFIG,
+    MOCK_HISTORY,
+    MOCK_STATUS,
+    MOCK_VERSION,
+    YAML_CONFIG,
+    init_integration,
+)
 
 from tests.async_mock import patch
 from tests.common import MockConfigEntry
@@ -19,7 +26,7 @@ from tests.common import MockConfigEntry
 async def test_import_from_yaml(hass) -> None:
     """Test import from YAML."""
     with _patch_version(), _patch_status(), _patch_history(), _patch_async_setup_entry():
-        assert await async_setup_component(hass, DOMAIN, {DOMAIN: ENTRY_CONFIG})
+        assert await async_setup_component(hass, DOMAIN, {DOMAIN: YAML_CONFIG})
         await hass.async_block_till_done()
 
     entries = hass.config_entries.async_entries(DOMAIN)
