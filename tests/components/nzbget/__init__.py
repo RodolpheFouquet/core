@@ -8,6 +8,7 @@ from homeassistant.const import (
     CONF_SCAN_INTERVAL,
     CONF_SSL,
     CONF_USERNAME,
+    CONF_VERIFY_SSL,
 )
 
 from tests.async_mock import patch
@@ -20,6 +21,7 @@ ENTRY_CONFIG = {
     CONF_PORT: 6789,
     CONF_SSL: False,
     CONF_USERNAME: "",
+    CONF_VERIFY_SSL: False,
 }
 
 YAML_CONFIG = {
