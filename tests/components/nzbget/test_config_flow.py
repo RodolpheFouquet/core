@@ -11,13 +11,7 @@ from homeassistant.data_entry_flow import (
 )
 from homeassistant.setup import async_setup_component
 
-from . import (
-    ENTRY_CONFIG,
-    MOCK_HISTORY,
-    MOCK_STATUS,
-    MOCK_VERSION,
-    USER_INPUT,
-)
+from . import ENTRY_CONFIG, MOCK_HISTORY, MOCK_STATUS, MOCK_VERSION, USER_INPUT
 
 from tests.async_mock import patch
 from tests.common import MockConfigEntry
