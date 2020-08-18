@@ -207,22 +207,23 @@ class NZBGetDataUpdateCoordinator(DataUpdateCoordinator):
         self._completed_downloads = actual_completed_downloads
         self._completed_downloads_init = True
 
-    def _update_data(self) -> dict:
-        """Fetch data from NZBGet via sync functions."""
-        status = self.nzbget.status()
-        history = self.nzbget.history()
-
-        self._check_completed_downloads(history)
-
-        return {
-            "status": status,
-            "downloads": history,
-        }
-
     async def _async_update_data(self) -> dict:
         """Fetch data from NZBGet."""
+
+        def _update_data() -> dict:
+            """Fetch data from NZBGet via sync functions."""
+            status = self.nzbget.status()
+            history = self.nzbget.history()
+
+            self._check_completed_downloads(history)
+
+            return {
+                "status": status,
+                "downloads": history,
+            }
+
         try:
-            data = await self.hass.async_add_executor_job(self._update_data)
+            data = await self.hass.async_add_executor_job(_update_data)
             return data
         except NZBGetAPIException as error:
             raise UpdateFailed(f"Invalid response from API: {error}")
